@@ -74,7 +74,7 @@ export const icons = {
 export const onboarding = [
     {
         id: 1,
-        title: "The best car in your hands with Ryde",
+        title: "The best car in your hands with",
         description:
             "Discover the convenience of finding your perfect ride with our Ryde App",
         image: images.onboarding1,

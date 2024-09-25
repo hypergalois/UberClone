@@ -48,9 +48,16 @@ export default function Welcome() {
                             resizeMode="contain"
                         />
                         <View className="flex flex-row items-center justify-center w-full mt-5">
-                            <Text className="text-black text-3xl font-JakartaBold mx-10 text-center">
-                                {item.title}
-                            </Text>
+                            {item.id === 1 ? (
+                                <Text className="text-black text-3xl font-JakartaBold mx-10 text-center">
+                                    {item.title}{" "}
+                                    <Text className="text-[#0286ff]">Ryde</Text>
+                                </Text>
+                            ) : (
+                                <Text className="text-black text-3xl font-JakartaBold mx-10 text-center">
+                                    {item.title}
+                                </Text>
+                            )}
                         </View>
                         <Text className="text-xl font-JakartaMedium text-center text-[#858585] mx-10 mt-3">
                             {item.description}
