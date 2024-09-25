@@ -1,10 +1,10 @@
 import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function History() {
+export default function Rides() {
     return (
         <SafeAreaView>
-            <Text> History </Text>
+            <Text> Rides </Text>
         </SafeAreaView>
     );
 }
