@@ -4,6 +4,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 import Swiper from "react-native-swiper";
 
+import { onboarding } from "../../constants/index";
+
 export default function Welcome() {
     const swiperRef = useRef<Swiper>(null);
     const [activeIndex, setActiveIndex] = useState(0);
@@ -30,30 +32,16 @@ export default function Welcome() {
                 }
                 onIndexChanged={(index) => setActiveIndex(index)}
             >
-                <View className="flex items-center justify-center">
-                    <Text className="text-black text-3xl font-JakartaBold">
-                        Welcome to
-                    </Text>
-                    <Text className="text-black text-3xl font-JakartaBold">
-                        Jakarta
-                    </Text>
-                </View>
-                <View className="flex items-center justify-center">
-                    <Text className="text-black text-3xl font-JakartaBold">
-                        Welcome to
-                    </Text>
-                    <Text className="text-black text-3xl font-JakartaBold">
-                        Jakarta
-                    </Text>
-                </View>
-                <View className="flex items-center justify-center">
-                    <Text className="text-black text-3xl font-JakartaBold">
-                        Welcome to
-                    </Text>
-                    <Text className="text-black text-3xl font-JakartaBold">
-                        Jakarta
-                    </Text>
-                </View>
+                {onboarding.map((item) => (
+                    <View key={item.id}>
+                        <Text className="text-black text-3xl font-JakartaBold">
+                            {item.title}
+                        </Text>
+                        <Text className="text-black text-lg font-JakartaRegular">
+                            {item.description}
+                        </Text>
+                    </View>
+                ))}
             </Swiper>
         </SafeAreaView>
     );
