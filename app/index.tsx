@@ -1,10 +1,5 @@
-import { Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Redirect } from "expo-router";
 
 export default function Home() {
-    return (
-        <SafeAreaView>
-            <Text> Me cago en marcelino garcia toral </Text>
-        </SafeAreaView>
-    );
+    return <Redirect href={"/(auth)/welcome"} />;
 }
