@@ -10,7 +10,6 @@ import { Link } from "expo-router";
 
 export default function SignUp() {
     const [form, setForm] = useState({
-        name: "",
         email: "",
         password: "",
     });
