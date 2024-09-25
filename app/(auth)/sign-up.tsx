@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import InputField from "@/components/InputField";
 import CustomButton from "@/components/CustomButton";
+import OAuth from "@/components/OAuth";
 
 import { icons, images } from "@/constants";
 import { Link } from "expo-router";
@@ -63,7 +64,7 @@ export default function SignUp() {
                         className="mt-6"
                     />
 
-                    {/* {Oauth} */}
+                    <OAuth />
 
                     <Link
                         href="/sign-in"
