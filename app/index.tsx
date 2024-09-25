@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function Home() {
     return (
         <SafeAreaView>
-            <Text> hellow rodol </Text>
+            <Text> Me cago en marcelino garcia toral </Text>
         </SafeAreaView>
     );
 }
