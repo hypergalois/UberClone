@@ -4,6 +4,8 @@ import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import { useEffect } from "react";
 
+import { tokenCache } from "@/lib/auth";
+
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
 
 if (!publishableKey) {
@@ -36,7 +38,7 @@ export default function RootLayout() {
     }
 
     return (
-        <ClerkProvider publishableKey={publishableKey}>
+        <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
             <ClerkLoaded>
                 <Stack>
                     <Stack.Screen
@@ -44,7 +46,7 @@ export default function RootLayout() {
                         options={{ headerShown: false }}
                     />
                     <Stack.Screen
-                        name="(root)/(tabs)"
+                        name="(root)"
                         options={{ headerShown: false }}
                     />
                     <Stack.Screen
