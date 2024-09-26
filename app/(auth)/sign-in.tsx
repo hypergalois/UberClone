@@ -1,20 +1,46 @@
-import { Text, View, ScrollView, Image } from "react-native";
-import { useState } from "react";
+import { Text, View, ScrollView, Image, Alert } from "react-native";
+import { useState, useCallback } from "react";
+
+import { useSignIn } from "@clerk/clerk-expo";
+import { Link, useRouter } from "expo-router";
 
 import InputField from "@/components/InputField";
 import CustomButton from "@/components/CustomButton";
 import OAuth from "@/components/OAuth";
 
 import { icons, images } from "@/constants";
-import { Link } from "expo-router";
 
 export default function SignUp() {
+    const { signIn, setActive, isLoaded } = useSignIn();
+    const router = useRouter();
+
     const [form, setForm] = useState({
         email: "",
         password: "",
     });
 
-    const onSignInPress = async () => {};
+    const onSignInPress = useCallback(async () => {
+        if (!isLoaded) {
+            return;
+        }
+
+        try {
+            const signInAttempt = await signIn.create({
+                identifier: form.email,
+                password: form.password,
+            });
+
+            if (signInAttempt.status === "complete") {
+                await setActive({ session: signInAttempt.createdSessionId });
+                router.replace("/(root)/(tabs)/home");
+            } else {
+                console.error(JSON.stringify(signInAttempt, null, 2));
+            }
+        } catch (err: any) {
+            Alert.alert("Error", err.errors[0].longMessage);
+            // console.error(JSON.stringify(err, null, 2));
+        }
+    }, [isLoaded, form]);
 
     return (
         <ScrollView className="flex-1 bg-white">
