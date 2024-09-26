@@ -12,6 +12,7 @@
   "dependencies": {
     "@clerk/clerk-expo": "^2.2.16",
     "@expo/metro-runtime": "~3.2.3",
+    "@neondatabase/serverless": "^0.9.5",
     "@types/react": "~18.2.79",
     "expo": "~51.0.28",
     "expo-router": "~3.5.23",
