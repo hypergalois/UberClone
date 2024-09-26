@@ -10,6 +10,7 @@ import OAuth from "@/components/OAuth";
 
 import { icons, images } from "@/constants";
 import ReactNativeModal from "react-native-modal";
+import { fetchApi } from "@/lib/fetch";
 
 export default function SignUp() {
     const router = useRouter();
@@ -63,6 +64,14 @@ export default function SignUp() {
 
             if (completeSignUp.status === "complete") {
                 // TODO. Create a db user
+                await fetchApi("/(api)/user", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        name: form.name,
+                        email: form.email,
+                        clerkId: completeSignUp.createdUserId,
+                    }),
+                });
 
                 await setActive({ session: completeSignUp.createdSessionId });
                 setVerification({ ...verification, state: "success" });
