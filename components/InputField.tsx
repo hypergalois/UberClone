@@ -48,6 +48,7 @@ export default function InputField({
                         )}
                         <TextInput
                             placeholder={placeholder}
+                            placeholderTextColor="#C0C0C0"
                             value={value}
                             onChangeText={onChangeText}
                             secureTextEntry={secureTextEntry}
