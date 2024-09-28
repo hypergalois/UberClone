@@ -10,7 +10,7 @@ import OAuth from "@/components/OAuth";
 
 import { icons, images } from "@/constants";
 import ReactNativeModal from "react-native-modal";
-import { fetchApi } from "@/lib/fetch";
+import { fetchAPI } from "@/lib/fetch";
 
 export default function SignUp() {
     const router = useRouter();
@@ -29,6 +29,9 @@ export default function SignUp() {
         code: "",
     });
 
+    const [isVerificationModalVisible, setIsVerificationModalVisible] =
+        useState(false);
+
     const onSignUpPress = async () => {
         if (!isLoaded) {
             return;
@@ -45,6 +48,7 @@ export default function SignUp() {
             });
 
             setVerification({ ...verification, state: "pending" });
+            setIsVerificationModalVisible(true);
         } catch (err: any) {
             Alert.alert("Error", err.errors[0].longMessage);
         }
@@ -52,6 +56,15 @@ export default function SignUp() {
 
     const onPressVerify = async () => {
         if (!isLoaded) {
+            return;
+        }
+
+        if (!verification.code) {
+            setVerification({
+                ...verification,
+                state: "failure",
+                error: "Verification code is required",
+            });
             return;
         }
 
@@ -63,8 +76,7 @@ export default function SignUp() {
             );
 
             if (completeSignUp.status === "complete") {
-                // TODO. Create a db user
-                await fetchApi("/(api)/user", {
+                await fetchAPI("/(api)/user", {
                     method: "POST",
                     body: JSON.stringify({
                         name: form.name,
@@ -75,6 +87,7 @@ export default function SignUp() {
 
                 await setActive({ session: completeSignUp.createdSessionId });
                 setVerification({ ...verification, state: "success" });
+                setIsVerificationModalVisible(false);
             } else {
                 setVerification({
                     ...verification,
@@ -152,9 +165,14 @@ export default function SignUp() {
                 </View>
 
                 <ReactNativeModal
-                    isVisible={verification.state === "pending"}
+                    isVisible={isVerificationModalVisible}
                     onModalHide={() => {
-                        setVerification({ ...verification, state: "success" });
+                        if (verification.state === "success") {
+                            setVerification({
+                                ...verification,
+                                state: "success",
+                            });
+                        }
                     }}
                 >
                     <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px]">

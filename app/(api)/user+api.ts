@@ -17,12 +17,12 @@ export async function POST(req: Request) {
 
         const result = await sql`
         INSERT INTO users (name, email, clerk_id) 
-        VALUES (${name} ${email} ${clerkId})
+        VALUES (${name}, ${email}, ${clerkId})
     `;
 
         return Response.json({ data: result }, { status: 201 });
     } catch (error) {
-        console.log(error);
+        console.log("Error creating user: ", error);
         return Response.json(
             { error: "Internal server error" },
             { status: 500 }
