@@ -11,6 +11,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useUser } from "@clerk/clerk-expo";
 
 import RideCard from "@/components/RideCard";
+import GoogleTextInput from "@/components/GoogleTextInput";
 import { icons, images } from "@/constants";
 
 const mockDrives = [
@@ -128,6 +129,10 @@ export default function Page() {
         // Signout logic
     };
 
+    const handleDestinationPress = () => {
+        // Handle destination press
+    };
+
     return (
         <SafeAreaView className="bg-general-500 h-full">
             <FlatList
@@ -161,24 +166,45 @@ export default function Page() {
                     </View>
                 )}
                 ListHeaderComponent={() => (
-                    <View className="flex flex-row items-center justify-between my-5">
-                        <Text className="text-xl font-JakartaBold text- mt-5 capitalize">
-                            Welcome{" "}
-                            {user?.firstName ||
-                                user?.emailAddresses[0].emailAddress.split(
-                                    "@"
-                                )[0]}{" "}
-                            👋
-                        </Text>
-                        <TouchableOpacity
-                            onPress={handleSignout}
-                            className="justify-center items-center w-10 h-10 rounded-full bg-white"
-                        >
-                            <Image source={icons.out} className="w-4 h-4" />
-                        </TouchableOpacity>
-                    </View>
+                    <>
+                        <View className="flex flex-row items-center justify-between my-5">
+                            <Text className="text-xl font-JakartaBold text- mt-5 capitalize">
+                                Welcome{" "}
+                                {user?.firstName ||
+                                    user?.emailAddresses[0].emailAddress.split(
+                                        "@"
+                                    )[0]}{" "}
+                                👋
+                            </Text>
+                            <TouchableOpacity
+                                onPress={handleSignout}
+                                className="justify-center items-center w-10 h-10 rounded-full bg-white"
+                            >
+                                <Image source={icons.out} className="w-4 h-4" />
+                            </TouchableOpacity>
+                        </View>
 
-                    // {Google text input}
+                        <GoogleTextInput
+                            icon={icons.search}
+                            containerStyle="bg-white shadow-md shadow-netrual-300"
+                            handlePress={handleDestinationPress}
+                        />
+
+                        <>
+                            <Text className="text-xl font-JakartaBold mt-5 mb-3">
+                                Your current location
+                            </Text>
+                            <View className="flex flex-row items-center bg-transparent h-[300px]">
+                                <Text className="text-lg font-JakartaMedium">
+                                    Map
+                                </Text>
+                            </View>
+                        </>
+
+                        <Text className="text-xl font-JakartaBold mt-5 mb-3">
+                            Recent Rides
+                        </Text>
+                    </>
                 )}
             />
         </SafeAreaView>
