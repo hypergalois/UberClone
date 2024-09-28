@@ -1,7 +1,17 @@
-import { Text, View, FlatList } from "react-native";
+import {
+    Text,
+    View,
+    FlatList,
+    Image,
+    ActivityIndicator,
+    TouchableOpacity,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { useUser } from "@clerk/clerk-expo";
+
 import RideCard from "@/components/RideCard";
+import { icons, images } from "@/constants";
 
 const mockDrives = [
     {
@@ -111,11 +121,65 @@ const mockDrives = [
 ];
 
 export default function Page() {
+    const { user } = useUser();
+    const loading = true;
+
+    const handleSignout = () => {
+        // Signout logic
+    };
+
     return (
         <SafeAreaView className="bg-general-500 h-full">
             <FlatList
                 data={mockDrives}
                 renderItem={({ item }) => <RideCard ride={item} />}
+                className="px-5"
+                keyboardShouldPersistTaps="handled"
+                contentContainerStyle={{ paddingBottom: 100 }}
+                ListEmptyComponent={() => (
+                    <View className="flex flex-col items-center justify-center">
+                        {loading ? (
+                            <View className="items-center">
+                                <ActivityIndicator
+                                    size="large"
+                                    color="#0286FF"
+                                />
+                            </View>
+                        ) : (
+                            <View className="items-center">
+                                <Image
+                                    source={images.noResult}
+                                    className="w-40 h-40"
+                                    alt="No recent rides found"
+                                    resizeMode="contain"
+                                />
+                                <Text className="text-sm">
+                                    No recent rides found
+                                </Text>
+                            </View>
+                        )}
+                    </View>
+                )}
+                ListHeaderComponent={() => (
+                    <View className="flex flex-row items-center justify-between my-5">
+                        <Text className="text-xl font-JakartaBold text- mt-5 capitalize">
+                            Welcome{" "}
+                            {user?.firstName ||
+                                user?.emailAddresses[0].emailAddress.split(
+                                    "@"
+                                )[0]}{" "}
+                            👋
+                        </Text>
+                        <TouchableOpacity
+                            onPress={handleSignout}
+                            className="justify-center items-center w-10 h-10 rounded-full bg-white"
+                        >
+                            <Image source={icons.out} className="w-4 h-4" />
+                        </TouchableOpacity>
+                    </View>
+
+                    // {Google text input}
+                )}
             />
         </SafeAreaView>
     );
