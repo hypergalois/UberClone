@@ -4,8 +4,6 @@ import { useAuth } from "@clerk/clerk-expo";
 export default function Home() {
     const { isSignedIn } = useAuth();
 
-    console.log("Am i signedIn", isSignedIn);
-
     if (isSignedIn) {
         return <Redirect href={"/(root)/(tabs)/home"} />;
     }
