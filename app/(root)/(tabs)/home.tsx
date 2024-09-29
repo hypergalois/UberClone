@@ -11,7 +11,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useUser } from "@clerk/clerk-expo";
 
 import RideCard from "@/components/RideCard";
+import Map from "@/components/Map";
 import GoogleTextInput from "@/components/GoogleTextInput";
+
 import { icons, images } from "@/constants";
 
 const mockDrives = [
@@ -195,9 +197,7 @@ export default function Page() {
                                 Your current location
                             </Text>
                             <View className="flex flex-row items-center bg-transparent h-[300px]">
-                                <Text className="text-lg font-JakartaMedium">
-                                    Map
-                                </Text>
+                                <Map />
                             </View>
                         </>
 
