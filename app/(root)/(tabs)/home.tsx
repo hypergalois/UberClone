@@ -6,7 +6,9 @@ import {
     ActivityIndicator,
     TouchableOpacity,
 } from "react-native";
+import * as Location from "expo-location";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useState, useEffect } from "react";
 
 import { useUser } from "@clerk/clerk-expo";
 
@@ -128,6 +130,34 @@ export default function Page() {
     const { setUserLocation, setDestinationLocation } = useLocationStore();
     const { user } = useUser();
     const loading = true;
+
+    const [hasPermissions, setHasPermissions] = useState(false);
+
+    useEffect(() => {
+        async function getLocation() {
+            let { status } = await Location.requestForegroundPermissionsAsync();
+
+            if (status !== "granted") {
+                setHasPermissions(false);
+                return;
+            }
+
+            const location = await Location.getCurrentPositionAsync();
+
+            const address = await Location.reverseGeocodeAsync({
+                latitude: location.coords?.latitude!,
+                longitude: location.coords?.longitude!,
+            });
+
+            setUserLocation({
+                latitude: location.coords?.latitude!,
+                longitude: location.coords?.longitude!,
+                address: `${address[0].name}, ${address[0].region}`,
+            });
+        }
+
+        getLocation();
+    }, []);
 
     const handleSignout = () => {
         // Signout logic
