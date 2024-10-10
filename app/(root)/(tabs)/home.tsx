@@ -15,6 +15,7 @@ import Map from "@/components/Map";
 import GoogleTextInput from "@/components/GoogleTextInput";
 
 import { icons, images } from "@/constants";
+import { useLocationStore } from "@/store";
 
 const mockDrives = [
     {
@@ -124,6 +125,7 @@ const mockDrives = [
 ];
 
 export default function Page() {
+    const { setUserLocation, setDestinationLocation } = useLocationStore();
     const { user } = useUser();
     const loading = true;
 
