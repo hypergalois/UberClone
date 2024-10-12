@@ -1,3 +1,6 @@
+// Polyfill for crypto getRandomValues
+import "react-native-get-random-values";
+
 import { Stack } from "expo-router";
 import { ClerkProvider, ClerkLoaded } from "@clerk/clerk-expo";
 import * as SplashScreen from "expo-splash-screen";
