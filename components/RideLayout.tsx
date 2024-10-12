@@ -12,7 +12,7 @@ export default function RideLayout({
     children,
 }: {
     title: string;
-    snapPoints: string[];
+    snapPoints?: string[];
     children: React.ReactNode;
 }) {
     const bottomSheetRef = useRef<BottomSheet>(null);
