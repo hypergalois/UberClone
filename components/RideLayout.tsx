@@ -8,9 +8,11 @@ import { useRef } from "react";
 
 export default function RideLayout({
     title,
+    snapPoints,
     children,
 }: {
     title: string;
+    snapPoints: string[];
     children: React.ReactNode;
 }) {
     const bottomSheetRef = useRef<BottomSheet>(null);
@@ -36,8 +38,9 @@ export default function RideLayout({
                     <Map />
                 </View>
                 <BottomSheet
+                    keyboardBehavior="extend"
                     ref={bottomSheetRef}
-                    snapPoints={["40%", "85%"]}
+                    snapPoints={snapPoints || ["40%", "85%"]}
                     index={0}
                 >
                     <BottomSheetView style={{ flex: 1, padding: 20 }}>
