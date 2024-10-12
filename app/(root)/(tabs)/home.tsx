@@ -18,6 +18,7 @@ import GoogleTextInput from "@/components/GoogleTextInput";
 
 import { icons, images } from "@/constants";
 import { useLocationStore } from "@/store";
+import { router } from "expo-router";
 
 const mockDrives = [
     {
@@ -157,14 +158,20 @@ export default function Page() {
         }
 
         getLocation();
-    }, []);
+    }, [setUserLocation]);
 
     const handleSignout = () => {
         // Signout logic
     };
 
-    const handleDestinationPress = () => {
-        // Handle destination press
+    const handleDestinationPress = (location: {
+        latitude: number;
+        longitude: number;
+        address: string;
+    }) => {
+        setDestinationLocation(location);
+
+        router.push("/(root)/find-ride");
     };
 
     return (
