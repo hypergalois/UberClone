@@ -160,6 +160,15 @@ export default function Page() {
         getLocation();
     }, [setUserLocation]);
 
+    useEffect(() => {
+        // Cleanup destination from previous ride
+        setDestinationLocation({
+            latitude: null,
+            longitude: null,
+            address: null,
+        });
+    }, [setDestinationLocation]);
+
     const handleSignout = () => {
         // Signout logic
     };
