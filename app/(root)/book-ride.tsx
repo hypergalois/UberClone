@@ -7,6 +7,7 @@ import RideLayout from "@/components/RideLayout";
 import { icons } from "@/constants";
 import { formatTime } from "@/lib/utils";
 import { useDriverStore, useLocationStore } from "@/store";
+import { useEffect, useState } from "react";
 
 const drivers = [
     {
@@ -81,7 +82,7 @@ const BookRide = () => {
         <StripeProvider
             publishableKey={process.env.EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY!}
             merchantIdentifier="merchant.com.uber"
-            urlScheme="myapp"
+            urlScheme="uber"
         >
             <RideLayout title="Book Ride">
                 <>
