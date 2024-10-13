@@ -69,7 +69,7 @@ const BookRide = () => {
                                 Pickup Time
                             </Text>
                             <Text className="text-lg font-JakartaRegular">
-                                {formatTime(driverDetails?.time!)}
+                                {formatTime(parseInt(`${driverDetails?.time}`))}
                             </Text>
                         </View>
 
