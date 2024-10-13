@@ -36,7 +36,7 @@ const Payment = ({
             merchantDisplayName: "Uber, Inc.",
             intentConfiguration: {
                 mode: {
-                    amount: parseInt(amount) * 100,
+                    amount: Number(amount) * 100,
                     currencyCode: "usd",
                 },
                 confirmHandler: async (
