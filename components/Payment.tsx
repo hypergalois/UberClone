@@ -22,6 +22,15 @@ const Payment = ({
     const { userId } = useAuth();
     const [success, setSuccess] = useState(false);
 
+    const {
+        userAddress,
+        userLatitude,
+        userLongitude,
+        destinationAddress,
+        destinationLatitude,
+        destinationLongitude,
+    } = useLocationStore();
+
     const initializePaymentSheet = async () => {
         const { error } = await initPaymentSheet({
             merchantDisplayName: "Example, Inc.",
@@ -99,8 +108,8 @@ const Payment = ({
             returnURL: "uber://book-ride",
         });
 
-        if (!error) {
-            // setLoading(true);
+        if (error) {
+            console.log(error);
         }
     };
 
