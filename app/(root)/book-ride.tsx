@@ -1,3 +1,6 @@
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
+
 import { useUser } from "@clerk/clerk-expo";
 import { StripeProvider } from "@stripe/stripe-react-native";
 import { Image, Text, View } from "react-native";
