@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { Driver, MarkerData } from "@/types/type";
 import { icons } from "@/constants";
 import { useFetch } from "@/lib/fetch";
+import MapViewDirections from "react-native-maps-directions";
 
 export default function Map() {
     const {
@@ -112,6 +113,37 @@ export default function Map() {
                     }
                 ></Marker>
             ))}
+
+            {destinationLatitude && destinationLongitude && (
+                <Marker
+                    key="destination"
+                    coordinate={{
+                        latitude: destinationLatitude,
+                        longitude: destinationLongitude,
+                    }}
+                    title="Destination"
+                    image={icons.pin}
+                ></Marker>
+            )}
+
+            {userLatitude &&
+                userLongitude &&
+                destinationLatitude &&
+                destinationLongitude && (
+                    <MapViewDirections
+                        origin={{
+                            latitude: userLatitude,
+                            longitude: userLongitude,
+                        }}
+                        destination={{
+                            latitude: destinationLatitude,
+                            longitude: destinationLongitude,
+                        }}
+                        apikey={process.env.EXPO_PUBLIC_GOOGLE_API_KEY!}
+                        strokeColor="#0286ff"
+                        strokeWidth={2}
+                    />
+                )}
         </MapView>
     );
 }
