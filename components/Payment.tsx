@@ -96,7 +96,7 @@ const Payment = ({
                     }
                 },
             },
-            returnURL: "myapp://book-ride",
+            returnURL: "uber://book-ride",
         });
 
         if (!error) {
