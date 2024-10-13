@@ -15,7 +15,7 @@ export default function FindRide() {
     } = useLocationStore();
 
     return (
-        <RideLayout title="Ride" snapPoints={["85%"]}>
+        <RideLayout title="Ride" snapPoints={["50%"]}>
             <View className="my-3">
                 <Text className="text-lg font-JakartaSemiBold mb-3">From</Text>
                 <GoogleTextInput
