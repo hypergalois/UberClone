@@ -10,7 +10,7 @@ import * as Location from "expo-location";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useState, useEffect } from "react";
 
-import { useUser } from "@clerk/clerk-expo";
+import { useUser, useAuth } from "@clerk/clerk-expo";
 
 import RideCard from "@/components/RideCard";
 import Map from "@/components/Map";
@@ -25,12 +25,13 @@ import { Ride } from "@/types/type";
 export default function Page() {
     const { setUserLocation, setDestinationLocation } = useLocationStore();
     const { user } = useUser();
+    const { signOut } = useAuth();
 
     const {
         data: recentRides,
         loading,
         error,
-    } = useFetch<Ride[]>(`/(api)/rides/${user?.id}`);
+    } = useFetch<Ride[]>(`/(api)/ride/${user?.id}`);
 
     const [hasPermissions, setHasPermissions] = useState(false);
 
@@ -70,7 +71,9 @@ export default function Page() {
     }, [setDestinationLocation]);
 
     const handleSignout = () => {
-        // Signout logic
+        signOut();
+
+        router.replace("/(auth)/sign-in");
     };
 
     const handleDestinationPress = (location: {
