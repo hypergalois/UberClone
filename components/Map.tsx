@@ -1,6 +1,6 @@
 import { useDriverStore, useLocationStore } from "@/store";
 import { ActivityIndicator, Text, View } from "react-native";
-import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Marker, PROVIDER_DEFAULT } from "react-native-maps";
 import {
     calculateDriverTimes,
     calculateRegion,
@@ -89,7 +89,7 @@ export default function Map() {
 
     return (
         <MapView
-            provider={PROVIDER_GOOGLE}
+            provider={PROVIDER_DEFAULT}
             className="w-full h-full rounded-2xl"
             tintColor="black"
             mapType="mutedStandard"
