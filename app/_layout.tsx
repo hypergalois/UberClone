@@ -7,6 +7,8 @@ import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import { useEffect } from "react";
 
+import { LogBox } from "react-native";
+
 import { tokenCache } from "@/lib/auth";
 
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
@@ -18,6 +20,8 @@ if (!publishableKey) {
 }
 
 SplashScreen.preventAutoHideAsync();
+
+LogBox.ignoreLogs(["Warning: ..."]); // Ignore clerk warning
 
 export default function RootLayout() {
     const [loaded] = useFonts({
