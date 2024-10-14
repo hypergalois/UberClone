@@ -21,7 +21,7 @@ if (!publishableKey) {
 
 SplashScreen.preventAutoHideAsync();
 
-LogBox.ignoreLogs(["Warning: ..."]); // Ignore clerk warning
+LogBox.ignoreLogs(["Clerk:"]); // Ignore clerk warning
 
 export default function RootLayout() {
     const [loaded] = useFonts({
