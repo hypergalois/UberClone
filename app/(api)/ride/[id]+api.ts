@@ -8,7 +8,7 @@ export async function GET(request: Request, { id }: { id: string }) {
         );
 
     try {
-        const sql = neon(`${process.env.DATABASE_URL}`);
+        const sql = neon(`${process.env.NEON_DATABASE_URL}`);
         const response = await sql`
         SELECT
             rides.ride_id,
